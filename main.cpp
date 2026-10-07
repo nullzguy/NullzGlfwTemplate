@@ -17,6 +17,10 @@ using namespace glm;
 struct winSettings {
     // Width and height
     int w, h;
+    // Frames per second & capping (simulation runs continuously, 
+    // rendering happens every 1/fps seconds)
+    bool capFps;
+    float fps;
     // Returns the aspect
     double aspect() const { return (double)w/(double)h; };
 };
@@ -48,7 +52,7 @@ int initImGui(Engine& e) {
     ImGui::CreateContext();
     // Style
     ImGuiStyle& style = ImGui::GetStyle();
-    style.Alpha = 0.9f;
+    style.Alpha = 0.8f;
     style.WindowRounding = 8.0f;
     // Colors
     // example:
@@ -64,14 +68,17 @@ int initImGui(Engine& e) {
     return 0;
 }
 
-void ImGuiFrame() {
+void ImGuiFrame(Engine& e, int tps) {
     // Create new frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
     ImGui::Begin("Controls and stuff");
     // The whole menu
+    ImGui::Checkbox("Cap FPS", &e.sets.capFps);
+    if (e.sets.capFps) ImGui::SliderFloat("Max FPS", &e.sets.fps, 5.0f, 360.0f);
     ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
+    ImGui::Text("%d TPS", tps);
 
     ImGui::End();
     ImGui::Render();
@@ -91,23 +98,44 @@ void updateGlfwWindow(Engine& e) {
 
 int main() {
     Engine engine;
-    engine.sets = {800, 600};
+    // 800x600 window, with fps capping enabled, and capped to 60.
+    engine.sets = {800, 600, true, 60.0f};
     if (engine.Init((char*)"Title")!=0) return 1;
     if (initImGui(engine)!=0) return 1;
 
+    int ticks = 0, tps = 0;
+    double tpsTimer = 0.0, renderTimer = 0.0;
     double oldT = glfwGetTime();
     while (!glfwWindowShouldClose(engine.window)) {
-        updateGlfwWindow(engine);
-        glfwPollEvents();
-        ImGuiFrame();
-
         // Compute delta time
         double currentT = glfwGetTime();
         double dt = currentT - oldT;
         oldT = currentT;
+        
+        // - Simulation -
 
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        glfwSwapBuffers(engine.window);
+        // simulation logic should go here
+
+        // renderTimer & TPS logic
+        renderTimer += dt*engine.sets.fps;
+        tpsTimer += dt;
+        ticks++;
+        if (tpsTimer >= 1.0) {
+            tpsTimer -= 1.0;
+            tps = ticks;
+            ticks = 0;
+        }
+
+        if (!engine.sets.capFps || renderTimer >= 1.0) {
+            // Subtract back the renderTimer
+            if (engine.sets.capFps) renderTimer -= 1.0;
+            // Update window stuff & render
+            updateGlfwWindow(engine);
+            glfwPollEvents();
+            ImGuiFrame(engine, tps);
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+            glfwSwapBuffers(engine.window);
+        }
     }
 
     ImGui_ImplOpenGL3_Shutdown();
