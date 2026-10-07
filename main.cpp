@@ -101,6 +101,7 @@ int main() {
         glfwPollEvents();
         ImGuiFrame();
 
+        // Compute delta time
         double currentT = glfwGetTime();
         double dt = currentT - oldT;
         oldT = currentT;
