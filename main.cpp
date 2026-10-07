@@ -63,8 +63,8 @@ int initImGui(Engine& e) {
     // https://docs.anvil.team/enums/imguicol
 
     // Init ImGUI
-    if (!ImGui_ImplGlfw_InitForOpenGL(e.window, true)) { cerr << "Failed to initialize ImGUI for OpenGL!"; return 1; }
-    if (!ImGui_ImplOpenGL3_Init("#version 460")) { cerr << "Failed to initialize ImGUI!"; return 1; }
+    if (!ImGui_ImplGlfw_InitForOpenGL(e.window, true)) { cerr << "Failed to initialize ImGUI for OpenGL!\n"; return 1; }
+    if (!ImGui_ImplOpenGL3_Init("#version 460")) { cerr << "Failed to initialize ImGUI!\n"; return 1; }
     return 0;
 }
 
