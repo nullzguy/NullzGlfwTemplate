@@ -91,6 +91,7 @@ void updateGlfwWindow(Engine& e) {
     glClearColor(0.1f, 0.1f, 0.16f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
     glOrtho(-e.sets.aspect(), e.sets.aspect(), -1.0, 1.0, -1.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
