@@ -11,10 +11,11 @@
 #include "imgui_impl_opengl3.h"
 
 #include "engine.h"
+#include "globalSettings.h"
 
 using namespace std;
 
-int Engine::Init(const char* name)
+int engine::Init(const char* name)
 {
     // Initialize glfw
     if (!glfwInit()) { cerr << "Failed to initialize GLFW!\n"; return 1; }
@@ -32,7 +33,7 @@ int Engine::Init(const char* name)
     return 0;
 }
 
-void Engine::Update()
+void engine::Update()
 {
     // Update width, height, projection, etc.
     // You can put some settings here, maybe.
@@ -47,7 +48,7 @@ void Engine::Update()
     glLoadIdentity();
 }
 
-int Engine::InitImGui()
+int engine::InitImGui()
 {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -69,19 +70,53 @@ int Engine::InitImGui()
     return 0;
 }
 
-void Engine::ImGuiFrame(int tps) 
+void engine::ImGuiFrame(int tps) 
 {
     // Create new frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
-    ImGui::Begin("Controls and stuff");
+    ImGui::Begin("Frame");
     // The whole menu
-    ImGui::Checkbox("Cap FPS", &sets.capFps);
-    if (sets.capFps) ImGui::SliderFloat("Max FPS", &sets.fps, 5.0f, 360.0f);
+    // maxFps <= 0 means uncapped
+    static float lastMaxFps = 60.0f;
+    bool capFps = sets.maxFps > 0.0f;
+    if (ImGui::Checkbox("Cap FPS", &capFps))
+    {
+        if (capFps) sets.maxFps = lastMaxFps;
+        else
+        {
+            lastMaxFps = sets.maxFps;
+            sets.maxFps = 0.0f;
+        }
+    }
+    if (capFps) ImGui::SliderFloat("Max FPS", &sets.maxFps, 5.0f, 360.0f);
+    // Same for tps
+    static float lastMaxTps = 20.0f;
+    bool capTps = globalSets.maxTps > 0.0f;
+    if (ImGui::Checkbox("Cap TPS", &capTps))
+    {
+        if (capTps) globalSets.maxTps = lastMaxTps;
+        else
+        {
+            lastMaxTps = globalSets.maxTps;
+            globalSets.maxTps = 0.0f;
+        }
+    }
+    if (capTps) ImGui::SliderFloat("Max TPS", &globalSets.maxTps, 5.0f, 360.0f);
+    // FPS and TPS display
     ImGui::Text("%.1f FPS", ImGui::GetIO().Framerate);
     ImGui::Text("%d TPS", tps);
 
     ImGui::End();
     ImGui::Render();
+}
+
+void engine::DestroyAll()
+{
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    glfwDestroyWindow(window);
+    glfwTerminate();
 }

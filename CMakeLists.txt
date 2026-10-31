@@ -25,12 +25,21 @@ FetchContent_MakeAvailable(imgui)
 
 # add executables
 add_executable(${PROJECT_NAME}
-        # winSettings
+        # global settings
+        include/globalSettings.h
+        src/globalSettings.cpp
+        # variables
+        include/globalVars.h
+        src/globalVars.cpp
+        # window settings
         include/winSettings.h
         src/winSettings.cpp
         # engine
         include/engine.h
         src/engine.cpp
+        # inputs
+        include/input.h
+        src/input.cpp
         # simulation
         include/simStep.h
         src/simStep.cpp
