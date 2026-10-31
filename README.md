@@ -29,8 +29,8 @@ The philosophy is about making everything simple and clean - by using functions 
 
 ## DETAILS
 - The simulation ticking rate is unlimited right now
+- Added simple inputs support
 
 ## TODO
 - Add ticking system limitation control just like framerate does
-- Add controls support
 - Add a full gpu communication pipeline support, with simplicity for the template user.
