@@ -1,16 +1,9 @@
 #pragma once
 
-#include <algorithm>
-#include <limits>
-#include <cmath>
-#include <iostream>
-#include <vector>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+#include <stdexcept>
+#include <string>
+
 #include <GLFW/glfw3.h>
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
 
 #include "input.h"
 #include "winSettings.h"

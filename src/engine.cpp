@@ -1,11 +1,8 @@
-#include <algorithm>
-#include <limits>
-#include <cmath>
 #include <iostream>
-#include <vector>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
+
+#include <glad/gl.h>
 #include <GLFW/glfw3.h>
+
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -21,12 +18,14 @@ int engine::Init(const char* name)
     if (!glfwInit()) { cerr << "Failed to initialize GLFW!\n"; return 1; }
     // Hint gl version for glfw
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     // Create window
     window = glfwCreateWindow(sets.w, sets.h, name, nullptr, nullptr);
     if (window == nullptr) { cerr << "Failed to create GLFW window!\n"; glfwTerminate(); return 1; }
     glfwMakeContextCurrent(window);
+    // Load OpenGL function pointers through glad
+    if (!gladLoadGL(glfwGetProcAddress)) { cerr << "Failed to initialize GLAD!\n"; glfwDestroyWindow(window); glfwTerminate(); return 1; }
     // Unlock fps
     glfwSwapInterval(0);
 
@@ -66,7 +65,7 @@ int engine::InitImGui()
 
     // Init ImGUI
     if (!ImGui_ImplGlfw_InitForOpenGL(window, true)) { cerr << "Failed to initialize ImGUI for OpenGL!\n"; return 1; }
-    if (!ImGui_ImplOpenGL3_Init("#version 460")) { cerr << "Failed to initialize ImGUI!\n"; return 1; }
+    if (!ImGui_ImplOpenGL3_Init("#version 410 compatibility")) { cerr << "Failed to initialize ImGUI!\n"; return 1; }
     return 0;
 }
 

@@ -7,7 +7,13 @@ Made for both lightweight tests, and massive projects.
 
 - CMake 3.20 or higher
 - C++ compiler with C++17 support
-- JetBrains Rider
+- JetBrains Rider (or any CMake-capable IDE)
+- OpenGL 4.1 compatible GPU/driver (compatibility profile)
+- GLFW 3.3 or higher
+- GLM
+
+GLAD is bundled in `external/glad` and is loaded automatically at engine startup.
+ImGui is fetched by CMake and does not need to be installed manually.
 
 ## Building and Running
 
@@ -31,6 +37,8 @@ The philosophy is about making everything simple and clean - by using functions 
 - The simulation ticking rate is unlimited right now
 - Added simple inputs support
 - Added ticking system limitation control just like framerate does
+- Added a full gpu communication pipeline support, with simplicity for the template user.
 
 ## TODO
-- Add a full gpu communication pipeline support, with simplicity for the template user.
+- Fix unlimited TPS stalling
+- Add fences

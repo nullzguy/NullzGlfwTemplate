@@ -1,6 +1,31 @@
+#include <glad/gl.h>
+#include <glm/glm.hpp>
+
 #include "render.h"
+#include "globalStuff.h"
+#include "shader.h"
 
 void Render()
 {
-    // Rendering stuff goes here
+    // Pass 1: sample ComputeTexB and write into FrameTex
+    glBindFramebuffer(GL_FRAMEBUFFER, FrameFBO);
+    glViewport(0, 0, renderWidth, renderHeight);
+
+    shader& fragment = fragmentShader();
+    fragment.Use();
+    fragment.SetVec2("res", glm::vec2((float)renderWidth, (float)renderHeight));
+    fragment.SetInt("computeTex", 0);
+
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, ComputeTexB);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    // Pass 2: present FrameTex on the default framebuffer
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, FrameFBO);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBlitFramebuffer(0, 0, renderWidth, renderHeight,
+                      0, 0, screenWidth, screenHeight,
+                      GL_COLOR_BUFFER_BIT, GL_NEAREST);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, screenWidth, screenHeight);
 }

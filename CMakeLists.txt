@@ -25,12 +25,14 @@ FetchContent_MakeAvailable(imgui)
 
 # add executables
 add_executable(${PROJECT_NAME}
+        # glad
+        external/glad/src/gl.c
         # global settings
         include/globalSettings.h
         src/globalSettings.cpp
         # variables
-        include/globalVars.h
-        src/globalVars.cpp
+        include/globalStuff.h
+        src/globalStuff.cpp
         # window settings
         include/winSettings.h
         src/winSettings.cpp
@@ -46,6 +48,9 @@ add_executable(${PROJECT_NAME}
         # rendering
         include/render.h
         src/render.cpp
+        # shader
+        include/shader.h
+        src/shader.cpp
         # main
         src/main.cpp
         # imgui
@@ -58,5 +63,10 @@ add_executable(${PROJECT_NAME}
 )
 
 # include libraries & directories
-target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/include ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends )
+target_include_directories(${PROJECT_NAME} PRIVATE include external/glad/include ${CMAKE_CURRENT_SOURCE_DIR}/include ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends )
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL glm::glm )
+# GLFW_INCLUDE_NONE stops GLFW from pulling in <GL/gl.h>, which conflicts with glad
+# SHADER_DIR makes shader loading independent of the working directory
+target_compile_definitions(${PROJECT_NAME} PRIVATE
+        GLFW_INCLUDE_NONE
+        SHADER_DIR="${CMAKE_CURRENT_SOURCE_DIR}/shaders")

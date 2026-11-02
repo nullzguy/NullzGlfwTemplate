@@ -1,22 +1,12 @@
 // -- NULLZ'S GLFW TEMPLATE --
 // Recommended to read README.md
 
-#include <algorithm>
-#include <limits>
-#include <cmath>
+#include <exception>
 #include <iostream>
-#include <vector>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
 #include <GLFW/glfw3.h>
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-
-#include "winSettings.h"
-#include "globalVars.h"
+#include "globalStuff.h"
 #include "engine.h"
-#include "render.h"
+#include "shader.h"
 
 using namespace std;
 
@@ -24,10 +14,12 @@ int main()
 {
     try
     {
+        // Init
         engine engine("nullz's glfw template", 800, 600);
         if (engine.InitImGui()!=0) return 1;
+        InitRenderTargets(engine.sets.w, engine.sets.h);
         StartTimer();
-    
+        
         // The main loop
         while (!glfwWindowShouldClose(engine.window))
         {
@@ -36,10 +28,10 @@ int main()
             engine.inputs.Poll();
             // Update timers
             UpdateDt();
-            // Try simulation
-            UpdateSim();
+            // Try updating the simulation
+            TryUpdateSim();
             // Try render
-            UpdateRender(engine);
+            TryRender(engine);
         }
     
         engine.DestroyAll();
