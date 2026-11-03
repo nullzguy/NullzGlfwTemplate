@@ -43,7 +43,8 @@ The philosophy is about making everything simple and clean - by using functions 
 - Did a lot of refactoring overall
 
 ## TODO
+- Do some more refactoring and tidy things up (because all the files are in the same directory)
 - Add fences
 - Add audio pipeline
-- Do some more refactoring and tidy things up (because all the files are in the same directory)
+- Add file importing and exporting
 - Do some optimizations maybe..?
