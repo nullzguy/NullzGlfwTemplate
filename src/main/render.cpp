@@ -1,9 +1,9 @@
 #include <glad/gl.h>
 #include <glm/glm.hpp>
 
-#include "render.h"
-#include "globalStuff.h"
-#include "shader.h"
+#include "main/render.h"
+#include "globals/globalStuff.h"
+#include "gpu/shader.h"
 
 void BlitFBO(int FBO)
 {

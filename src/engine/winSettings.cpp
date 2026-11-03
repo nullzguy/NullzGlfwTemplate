@@ -1,4 +1,4 @@
-#include "winSettings.h"
+#include "engine/winSettings.h"
 
 // return the aspect
 double winSettings::aspect() const

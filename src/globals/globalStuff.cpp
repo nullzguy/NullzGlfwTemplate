@@ -3,13 +3,13 @@
 #include <glad/gl.h>
 #include "imgui.h"
 #include "imgui_impl_opengl3.h"
-#include "globalStuff.h"
-#include "engine.h"
-#include "globalSettings.h"
-#include "render.h"
-#include "simStep.h"
-#include "shader.h"
-#include "textures.h"
+#include "globals/globalStuff.h"
+#include "engine/engine.h"
+#include "globals/globalSettings.h"
+#include "main/render.h"
+#include "main/sim.h"
+#include "gpu/shader.h"
+#include "gpu/textures.h"
 
 void InitShaders()
 {

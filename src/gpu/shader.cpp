@@ -6,7 +6,7 @@
 #include <glm/glm.hpp>
 #include <glad/gl.h>
 
-#include "shader.h"
+#include "gpu/shader.h"
 
 using namespace std;
 

@@ -27,35 +27,29 @@ FetchContent_MakeAvailable(imgui)
 add_executable(${PROJECT_NAME}
         # glad
         external/glad/src/gl.c
-        # global settings
-        include/globalSettings.h
-        src/globalSettings.cpp
-        # variables
-        include/globalStuff.h
-        src/globalStuff.cpp
-        # window settings
-        include/winSettings.h
-        src/winSettings.cpp
+        # globals
+        include/globals/globalSettings.h
+        src/globals/globalSettings.cpp
+        include/globals/globalStuff.h
+        src/globals/globalStuff.cpp
         # engine
-        include/engine.h
-        src/engine.cpp
-        # inputs
-        include/input.h
-        src/input.cpp
-        # simulation
-        include/simStep.h
-        src/simStep.cpp
-        # rendering
-        include/render.h
-        src/render.cpp
-        # shader
-        include/shader.h
-        src/shader.cpp
-        # textures (and FBOs)
-        include/textures.h
-        src/textures.cpp
+        include/engine/winSettings.h
+        src/engine/winSettings.cpp
+        include/engine/input.h
+        src/engine/input.cpp
+        include/engine/engine.h
+        src/engine/engine.cpp
+        # gpu
+        include/gpu/shader.h
+        src/gpu/shader.cpp
+        include/gpu/textures.h
+        src/gpu/textures.cpp
         # main
-        src/main.cpp
+        src/main/main.cpp
+        include/main/sim.h
+        src/main/sim.cpp
+        include/main/render.h
+        src/main/render.cpp
         # imgui
         ${imgui_SOURCE_DIR}/imgui.cpp
         ${imgui_SOURCE_DIR}/imgui_draw.cpp

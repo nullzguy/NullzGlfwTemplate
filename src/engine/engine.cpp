@@ -7,8 +7,8 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
-#include "engine.h"
-#include "globalSettings.h"
+#include "engine/engine.h"
+#include "globals/globalSettings.h"
 
 using namespace std;
 

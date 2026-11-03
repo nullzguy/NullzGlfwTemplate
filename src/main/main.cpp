@@ -4,9 +4,9 @@
 #include <exception>
 #include <iostream>
 #include <GLFW/glfw3.h>
-#include "globalStuff.h"
-#include "engine.h"
-#include "shader.h"
+#include "globals/globalStuff.h"
+#include "engine/engine.h"
+#include "gpu/shader.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "engine.h"
-#include "shader.h"
+#include "engine/engine.h"
+#include "gpu/shader.h"
 
 inline int ticks = 0, tps = 0;
 inline double tpsTimer = 0.0, renderTimer = 0.0,

@@ -5,7 +5,7 @@
 
 #include <GLFW/glfw3.h>
 
-#include "input.h"
+#include "engine/input.h"
 #include "winSettings.h"
 
 using namespace std;

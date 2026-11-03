@@ -2,9 +2,9 @@
 
 #include <glad/gl.h>
 
-#include "simStep.h"
-#include "globalStuff.h"
-#include "shader.h"
+#include "main/sim.h"
+#include "globals/globalStuff.h"
+#include "gpu/shader.h"
 
 void DrawFBO()
 {

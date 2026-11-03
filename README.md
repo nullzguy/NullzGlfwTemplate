@@ -41,9 +41,9 @@ The philosophy is about making everything simple and clean - by using functions 
 - Fixed unlocked TPS stalling
 - Synchronized the rendering resolution with window resolution
 - Did a lot of refactoring overall
+- Tidied the directories up to multiple sections
 
 ## TODO
-- Do some more refactoring and tidy things up (because all the files are in the same directory)
 - Add fences
 - Add audio pipeline
 - Add file importing and exporting
