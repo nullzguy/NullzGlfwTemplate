@@ -9,6 +9,7 @@
 #include "render.h"
 #include "simStep.h"
 #include "shader.h"
+#include "textures.h"
 
 void InitShaders()
 {
@@ -16,20 +17,24 @@ void InitShaders()
     fragmentShader = shader(SHADER_DIR "/vertex.glsl", SHADER_DIR "/fragment.glsl");
 }
 
-void InitRenderTargets(int width, int height)
+void InitRenderTargets(int width, int height, int compWidth, int compHeight)
 {
     renderWidth = width;
     renderHeight = height;
+    screenWidth = width;
+    screenHeight = height;
+    simWidth = compWidth;
+    simHeight = compHeight;
 
-    // Compute tex&FBO creation
-    computeShader.CreateTex2DUI(width, height, ComputeTexA);
-    computeShader.CreateTex2DUI(width, height, ComputeTexB);
-    computeShader.CreateFBO2DUI(ComputeFBOA, ComputeTexA);
-    computeShader.CreateFBO2DUI(ComputeFBOB, ComputeTexB);
+    // Compute A/B tex&FBO creation
+    CreateTex2DUI(compWidth, compHeight, ComputeTexA);
+    CreateTex2DUI(compWidth, compHeight, ComputeTexB);
+    CreateFBO2DUI(ComputeFBOA, ComputeTexA);
+    CreateFBO2DUI(ComputeFBOB, ComputeTexB);
 
-    // And for fragment
-    fragmentShader.CreateTex2D(width, height, FrameTex);
-    fragmentShader.CreateFBO2D(FrameFBO, FrameTex);
+    // And for frame
+    CreateTex2D(width, height, FrameTex);
+    CreateFBO2D(FrameFBO, FrameTex);
 
     // Texture bindings
     computeShader.Use();
@@ -58,6 +63,26 @@ void UpdateDt()
     double currentT = glfwGetTime();
     dt = std::min(currentT - oldT, 0.25); // min() so that dt doesnt get too high
     oldT = currentT;
+}
+
+void TryUpdateRes(engine& e)
+{
+    int width, height;
+    glfwGetFramebufferSize(e.window, &width, &height);
+
+    if (width != renderWidth || height != renderHeight)
+    {
+        DestroyFBO(FrameFBO);
+        DestroyTex(FrameTex);
+
+        renderWidth = width;
+        renderHeight = height;
+        CreateTex2D(width, height, FrameTex);
+        CreateFBO2D(FrameFBO, FrameTex);
+    }
+
+    screenWidth = width;
+    screenHeight = height;
 }
 
 void TryUpdateSim()

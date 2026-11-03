@@ -17,11 +17,13 @@ inline unsigned int ComputeFBOA = 0, ComputeFBOB = 0;
 inline unsigned int FrameTex = 0, FrameFBO = 0;
 inline int renderWidth = 0, renderHeight = 0;
 inline int screenWidth = 0, screenHeight = 0;
+inline int simWidth = 0, simHeight = 0;
 
 void InitShaders();
-void InitRenderTargets(int width, int height);
+void InitRenderTargets(int width, int height, int compWidth, int compHeight);
 void StartTimer();
 void UpdateDt();
+void TryUpdateRes(engine& e);
 void TryUpdateSim();
 void UpdateRenderTimer(engine& e);
 bool ShouldRender(engine& e);

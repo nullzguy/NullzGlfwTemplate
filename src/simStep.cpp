@@ -9,7 +9,7 @@
 void DrawFBO()
 {
     glBindFramebuffer(GL_FRAMEBUFFER, ComputeFBOA);
-    glViewport(0, 0, renderWidth, renderHeight);
+    glViewport(0, 0, simWidth, simHeight);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

@@ -33,12 +33,15 @@ I consider this a little engine actually. I am actively working on it, until you
 
 The philosophy is about making everything simple and clean - by using functions and multiple files.
 
-## DETAILS
+## DONE
 - Added simple inputs support
 - Added ticking system limitation control just like framerate does
 - Added a full gpu communication pipeline
+- Remade simulation resolution logic
+- Fixed unlocked TPS stalling
+- Synchronized the rendering resolution with window resolution
+- Did a lot of refactoring overall
 
 ## TODO
-- Fix unlimited TPS stalling
 - Add fences
-- Do optimizations maybe..?
+- Do some optimizations maybe..?

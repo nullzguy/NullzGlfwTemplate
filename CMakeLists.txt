@@ -51,6 +51,9 @@ add_executable(${PROJECT_NAME}
         # shader
         include/shader.h
         src/shader.cpp
+        # textures (and FBOs)
+        include/textures.h
+        src/textures.cpp
         # main
         src/main.cpp
         # imgui
