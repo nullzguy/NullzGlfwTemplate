@@ -44,6 +44,7 @@ The philosophy is about making everything simple and clean - by using functions 
 - Tidied the directories up to multiple sections
 
 ## TODO
+- Make shader files be put into the compiled binary
 - Add fences
 - Add audio pipeline
 - Add file importing and exporting

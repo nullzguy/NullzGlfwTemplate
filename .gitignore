@@ -1,5 +1,6 @@
 # CMake build directories
 out/
+build/
 
 # IDE directories
 .idea/
