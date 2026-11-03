@@ -44,4 +44,6 @@ The philosophy is about making everything simple and clean - by using functions 
 
 ## TODO
 - Add fences
+- Add audio pipeline
+- Do some more refactoring and tidy things up (because all the files are in the same directory)
 - Do some optimizations maybe..?
