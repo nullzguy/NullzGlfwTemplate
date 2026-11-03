@@ -23,6 +23,18 @@ FetchContent_Declare( imgui GIT_REPOSITORY https://github.com/ocornut/imgui.git 
         GIT_PROGRESS TRUE)
 FetchContent_MakeAvailable(imgui)
 
+# embed shaders
+set(SHADER_HEADER ${CMAKE_CURRENT_BINARY_DIR}/generated/shaders.hpp)
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/generated)
+file(WRITE ${SHADER_HEADER} "#pragma once\nnamespace Shaders {\n")
+file(GLOB SHADER_FILES CONFIGURE_DEPENDS ${CMAKE_SOURCE_DIR}/shaders/*.glsl)
+
+foreach(FILE ${SHADER_FILES})
+    get_filename_component(NAME ${FILE} NAME_WE)
+    file(READ ${FILE} SOURCE)
+    file(APPEND ${SHADER_HEADER} "inline constexpr const char* ${NAME} = R\"NULLZ(\n${SOURCE}\n)NULLZ\";\n")
+endforeach()
+
 # add executables
 add_executable(${PROJECT_NAME}
         # glad

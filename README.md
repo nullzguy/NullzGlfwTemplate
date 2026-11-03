@@ -1,24 +1,19 @@
 # - NullzGlfwTemplate -
 
-A C++, glfw, imgui template.\
+A C++, glfw, GL, imgui template.\
 Made for both lightweight tests, and massive projects.
 
 ## Requirements
 
 - CMake 3.20 or higher
 - C++ compiler with C++17 support
-- JetBrains Rider (or any CMake-capable IDE)
+- Any CMake-capable IDE
 - OpenGL 4.1 compatible GPU/driver (compatibility profile)
 - GLFW 3.3 or higher
 - GLM
 
 GLAD is bundled in `external/glad` and is loaded automatically at engine startup.
 ImGui is fetched by CMake and does not need to be installed manually.
-
-## Building and Running
-
-1. Open the project in Rider
-2. Use the Run/Debug buttons to build and execute the project
 
 ## About this project
 ##### Greets!
@@ -42,9 +37,9 @@ The philosophy is about making everything simple and clean - by using functions 
 - Synchronized the rendering resolution with window resolution
 - Did a lot of refactoring overall
 - Tidied the directories up to multiple sections
+- Embedded shader files into the compiled binary
 
 ## TODO
-- Make shader files be put into the compiled binary
 - Add fences
 - Add audio pipeline
 - Add file importing and exporting
