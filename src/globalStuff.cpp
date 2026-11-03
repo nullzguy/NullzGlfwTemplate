@@ -10,20 +10,10 @@
 #include "simStep.h"
 #include "shader.h"
 
-#ifndef SHADER_DIR
-#define SHADER_DIR "shaders"
-#endif
-
-shader& computeShader()
+void InitShaders()
 {
-    static shader s(SHADER_DIR "/vertex.glsl", SHADER_DIR "/compute.glsl");
-    return s;
-}
-
-shader& fragmentShader()
-{
-    static shader s(SHADER_DIR "/vertex.glsl", SHADER_DIR "/fragment.glsl");
-    return s;
+    computeShader = shader(SHADER_DIR "/vertex.glsl", SHADER_DIR "/compute.glsl");
+    fragmentShader = shader(SHADER_DIR "/vertex.glsl", SHADER_DIR "/fragment.glsl");
 }
 
 void InitRenderTargets(int width, int height)
@@ -31,28 +21,30 @@ void InitRenderTargets(int width, int height)
     renderWidth = width;
     renderHeight = height;
 
-    // Compute ping-pong targets (integer, initially empty)
-    computeShader().CreateTex2DUI(width, height, ComputeTexA);
-    computeShader().CreateTex2DUI(width, height, ComputeTexB);
-    computeShader().CreateFBO2DUI(ComputeFBOA, ComputeTexA);
-    computeShader().CreateFBO2DUI(ComputeFBOB, ComputeTexB);
+    // Compute tex&FBO creation
+    computeShader.CreateTex2DUI(width, height, ComputeTexA);
+    computeShader.CreateTex2DUI(width, height, ComputeTexB);
+    computeShader.CreateFBO2DUI(ComputeFBOA, ComputeTexA);
+    computeShader.CreateFBO2DUI(ComputeFBOB, ComputeTexB);
 
-    // Fragment pass target: RGBA8 so it can be blitted to the screen
-    fragmentShader().CreateTex2D(width, height, FrameTex);
-    fragmentShader().CreateFBO2D(FrameFBO, FrameTex);
+    // And for fragment
+    fragmentShader.CreateTex2D(width, height, FrameTex);
+    fragmentShader.CreateFBO2D(FrameFBO, FrameTex);
 
-    // Constant texture unit bindings
-    computeShader().Use();
-    computeShader().SetInt("simTexA", 0);
-    fragmentShader().Use();
-    fragmentShader().SetInt("computeTex", 0);
+    // Texture bindings
+    computeShader.Use();
+    computeShader.SetInt("simTexA", 0);
+    fragmentShader.Use();
+    fragmentShader.SetInt("computeTex", 0);
 
     // Make the compute textures empty
     glBindFramebuffer(GL_FRAMEBUFFER, ComputeFBOA);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
+
     glBindFramebuffer(GL_FRAMEBUFFER, ComputeFBOB);
     glClear(GL_COLOR_BUFFER_BIT);
+
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
@@ -129,7 +121,7 @@ void TryRender(engine& e)
 
         // Rendering logic
         Render();
-            
+
         // ImGui frame
         e.ImGuiFrame(tps);
         // Render and swap buffers

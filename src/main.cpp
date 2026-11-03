@@ -17,9 +17,10 @@ int main()
         // Init
         engine engine("nullz's glfw template", 800, 600);
         if (engine.InitImGui()!=0) return 1;
+        InitShaders();
         InitRenderTargets(engine.sets.w, engine.sets.h);
         StartTimer();
-        
+
         // The main loop
         while (!glfwWindowShouldClose(engine.window))
         {
@@ -33,7 +34,7 @@ int main()
             // Try render
             TryRender(engine);
         }
-    
+
         engine.DestroyAll();
         return 0;
     }

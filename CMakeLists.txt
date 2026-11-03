@@ -18,7 +18,7 @@ find_package(glm REQUIRED)
 # get imgui
 include(FetchContent)
 set(FETCHCONTENT_UPDATES_DISCONNECTED ON)
-FetchContent_Declare( imgui GIT_REPOSITORY https://github.com/ocornut/imgui.git GIT_TAG v1.91.9b 
+FetchContent_Declare( imgui GIT_REPOSITORY https://github.com/ocornut/imgui.git GIT_TAG v1.91.9b
         GIT_SHALLOW TRUE
         GIT_PROGRESS TRUE)
 FetchContent_MakeAvailable(imgui)
@@ -65,8 +65,6 @@ add_executable(${PROJECT_NAME}
 # include libraries & directories
 target_include_directories(${PROJECT_NAME} PRIVATE include external/glad/include ${CMAKE_CURRENT_SOURCE_DIR}/include ${imgui_SOURCE_DIR} ${imgui_SOURCE_DIR}/backends )
 target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL glm::glm )
-# GLFW_INCLUDE_NONE stops GLFW from pulling in <GL/gl.h>, which conflicts with glad
-# SHADER_DIR makes shader loading independent of the working directory
 target_compile_definitions(${PROJECT_NAME} PRIVATE
         GLFW_INCLUDE_NONE
         SHADER_DIR="${CMAKE_CURRENT_SOURCE_DIR}/shaders")

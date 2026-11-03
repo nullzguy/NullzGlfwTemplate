@@ -29,16 +29,16 @@ I honestly find it very inspiring and interesting.\
 But i found engines like Unity pretty overkill and bloaty.
 
 Thats why after some time, i decided to create my own little template, this one.\
-I consider this a little engine actually. I will expand it more and more, until eventually, you can create little tests, simulations, and massive projects, with ease, all with code, and *almost* zero bloat!
+I consider this a little engine actually. I am actively working on it, until you can create little tests, simulations, and massive projects, with ease, all with code, and *almost* zero bloat!
 
 The philosophy is about making everything simple and clean - by using functions and multiple files.
 
 ## DETAILS
-- The simulation ticking rate is unlimited right now
 - Added simple inputs support
 - Added ticking system limitation control just like framerate does
-- Added a full gpu communication pipeline support, with simplicity for the template user.
+- Added a full gpu communication pipeline
 
 ## TODO
 - Fix unlimited TPS stalling
 - Add fences
+- Do optimizations maybe..?

@@ -9,9 +9,11 @@ using namespace glm;
 
 struct shader {
     shader(const char* vertexPath, const char* fragmentPath);
-    
+
+    shader() = default;
+
     void Use() const;
-    
+
     void SetFloat(const char* var, float value);
     void SetVec2(const char* var, vec2 value);
     void SetVec3(const char* var, vec3 value);
@@ -20,7 +22,7 @@ struct shader {
     void SetVec2Array(const char* var, const vec2* values, int count);
     void SetVec3Array(const char* var, const vec3* values, int count);
     void SetVec4Array(const char* var, const vec4* values, int count);
-    
+
     void SetInt(const char* var, int value);
     void SetIvec2(const char* var, ivec2 value);
     void SetIvec3(const char* var, ivec3 value);
@@ -29,9 +31,9 @@ struct shader {
     void SetIvec2Array(const char* var, const ivec2* values, int count);
     void SetIvec3Array(const char* var, const ivec3* values, int count);
     void SetIvec4Array(const char* var, const ivec4* values, int count);
-    
+
     void SetBool(const char* var, bool value);
-    
+
     void CreateTex1D(int width, unsigned int &texID);
     void CreateTex2D(int width, int height, unsigned int &texID);
     void CreateTex3D(int width, int height, int depth, unsigned int &texID);
