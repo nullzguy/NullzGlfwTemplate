@@ -6,16 +6,14 @@
 #include "globals/globalStuff.h"
 #include "gpu/shader.h"
 
-void DrawFBO()
-{
+void DrawFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, ComputeFBOA);
     glViewport(0, 0, simWidth, simHeight);
     glDrawArrays(GL_TRIANGLES, 0, 3);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void SimStep(double dt)
-{
+void SimStep(double dt) {
     computeShader.Use();
     computeShader.SetFloat("dt", (float)dt);
 

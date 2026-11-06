@@ -38,9 +38,10 @@ The philosophy is about making everything simple and clean - by using functions 
 - Did a lot of refactoring overall
 - Tidied the directories up to multiple sections
 - Embedded shader files into the compiled binary
+- Added file management
 
 ## TODO
+- Add project debugging helpers
 - Add fences
 - Add audio pipeline
-- Add file importing and exporting
 - Do some optimizations maybe..?

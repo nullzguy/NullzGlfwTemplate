@@ -5,8 +5,7 @@
 #include "globals/globalStuff.h"
 #include "gpu/shader.h"
 
-void BlitFBO(int FBO)
-{
+void BlitFBO(int FBO) {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, FrameFBO);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glBlitFramebuffer(0, 0, renderWidth, renderHeight,
@@ -16,8 +15,7 @@ void BlitFBO(int FBO)
     glViewport(0, 0, screenWidth, screenHeight);
 }
 
-void Render()
-{
+void Render() {
     glBindFramebuffer(GL_FRAMEBUFFER, FrameFBO);
     glViewport(0, 0, renderWidth, renderHeight);
 

@@ -12,8 +12,7 @@
 
 using namespace std;
 
-int engine::Init(const char* name)
-{
+int engine::Init(const char* name) {
     // Initialize glfw
     if (!glfwInit()) { cerr << "Failed to initialize GLFW!\n"; return 1; }
     // Hint gl version for glfw
@@ -32,8 +31,7 @@ int engine::Init(const char* name)
     return 0;
 }
 
-void engine::Update()
-{
+void engine::Update() {
     // Update width, height, projection, etc.
     // You can put some settings here, maybe.
     glfwGetFramebufferSize(window, &sets.w, &sets.h);
@@ -47,8 +45,7 @@ void engine::Update()
     glLoadIdentity();
 }
 
-int engine::InitImGui()
-{
+int engine::InitImGui() {
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     // Style
@@ -69,8 +66,7 @@ int engine::InitImGui()
     return 0;
 }
 
-void engine::ImGuiFrame(int tps) 
-{
+void engine::ImGuiFrame(int tps) {
     // Create new frame
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -80,11 +76,9 @@ void engine::ImGuiFrame(int tps)
     // maxFps <= 0 means uncapped
     static float lastMaxFps = 60.0f;
     bool capFps = sets.maxFps > 0.0f;
-    if (ImGui::Checkbox("Cap FPS", &capFps))
-    {
+    if (ImGui::Checkbox("Cap FPS", &capFps)) {
         if (capFps) sets.maxFps = lastMaxFps;
-        else
-        {
+        else {
             lastMaxFps = sets.maxFps;
             sets.maxFps = 0.0f;
         }
@@ -93,11 +87,9 @@ void engine::ImGuiFrame(int tps)
     // Same for tps
     static float lastMaxTps = 20.0f;
     bool capTps = globalSets.maxTps > 0.0f;
-    if (ImGui::Checkbox("Cap TPS", &capTps))
-    {
+    if (ImGui::Checkbox("Cap TPS", &capTps)) {
         if (capTps) globalSets.maxTps = lastMaxTps;
-        else
-        {
+        else {
             lastMaxTps = globalSets.maxTps;
             globalSets.maxTps = 0.0f;
         }
@@ -111,8 +103,7 @@ void engine::ImGuiFrame(int tps)
     ImGui::Render();
 }
 
-void engine::DestroyAll()
-{
+void engine::DestroyAll() {
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

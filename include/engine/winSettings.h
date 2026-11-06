@@ -1,7 +1,6 @@
 #pragma once
 
-struct winSettings
-{
+struct winSettings {
     // width and height
     int w, h;
     // frames per second (rendering happens every 1/fps seconds)

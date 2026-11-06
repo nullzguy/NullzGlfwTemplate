@@ -44,6 +44,9 @@ add_executable(${PROJECT_NAME}
         src/globals/globalSettings.cpp
         include/globals/globalStuff.h
         src/globals/globalStuff.cpp
+        # files management
+        include/files_management/files.h
+        src/files_management/files.cpp
         # engine
         include/engine/winSettings.h
         src/engine/winSettings.cpp

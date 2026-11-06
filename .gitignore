@@ -24,3 +24,6 @@ Makefile
 *.user
 *.suo
 *.sln.docstates
+
+# ImGUI
+imgui.ini

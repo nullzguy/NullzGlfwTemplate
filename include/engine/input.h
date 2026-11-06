@@ -5,8 +5,7 @@
 
 using namespace glm;
 
-struct input
-{
+struct input {
     GLFWwindow* window = nullptr;
     dvec2 cursorPos{};
     dvec2 scrollAccum{};
