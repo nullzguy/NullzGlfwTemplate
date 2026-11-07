@@ -10,21 +10,19 @@
 #include "engine/engine.h"
 #include "globals/globalSettings.h"
 
-using namespace std;
-
 int engine::Init(const char* name) {
     // Initialize glfw
-    if (!glfwInit()) { cerr << "Failed to initialize GLFW!\n"; return 1; }
+    if (!glfwInit()) { std::cerr << "Failed to initialize GLFW!\n"; return 1; }
     // Hint gl version for glfw
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
     // Create window
     window = glfwCreateWindow(sets.w, sets.h, name, nullptr, nullptr);
-    if (window == nullptr) { cerr << "Failed to create GLFW window!\n"; glfwTerminate(); return 1; }
+    if (window == nullptr) { std::cerr << "Failed to create GLFW window!\n"; glfwTerminate(); return 1; }
     glfwMakeContextCurrent(window);
     // Load OpenGL function pointers through glad
-    if (!gladLoadGL(glfwGetProcAddress)) { cerr << "Failed to initialize GLAD!\n"; glfwDestroyWindow(window); glfwTerminate(); return 1; }
+    if (!gladLoadGL(glfwGetProcAddress)) { std::cerr << "Failed to initialize GLAD!\n"; glfwDestroyWindow(window); glfwTerminate(); return 1; }
     // Unlock fps
     glfwSwapInterval(0);
 
@@ -61,8 +59,8 @@ int engine::InitImGui() {
     // https://docs.anvil.team/enums/imguicol
 
     // Init ImGUI
-    if (!ImGui_ImplGlfw_InitForOpenGL(window, true)) { cerr << "Failed to initialize ImGUI for OpenGL!\n"; return 1; }
-    if (!ImGui_ImplOpenGL3_Init("#version 410 compatibility")) { cerr << "Failed to initialize ImGUI!\n"; return 1; }
+    if (!ImGui_ImplGlfw_InitForOpenGL(window, true)) { std::cerr << "Failed to initialize ImGUI for OpenGL!\n"; return 1; }
+    if (!ImGui_ImplOpenGL3_Init("#version 410 compatibility")) { std::cerr << "Failed to initialize ImGUI!\n"; return 1; }
     return 0;
 }
 

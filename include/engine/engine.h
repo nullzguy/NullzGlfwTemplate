@@ -8,8 +8,6 @@
 #include "engine/input.h"
 #include "winSettings.h"
 
-using namespace std;
-
 struct engine {
     GLFWwindow* window;
     winSettings sets;
@@ -23,9 +21,9 @@ struct engine {
     void DestroyAll();
     
     // Constructor
-    engine(string title, int width, int height, float fps = -1.0f) 
+    engine(std::string title, int width, int height, float fps = -1.0f) 
     : window(nullptr), sets(width, height, fps <= 0.0f ? 60.0f : fps), inputs() {
-        if (Init((title == "") ? "Title" : title.c_str()) != 0) throw runtime_error("Failed to initialize engine!");
+        if (Init((title == "") ? "Title" : title.c_str()) != 0) throw std::runtime_error("Failed to initialize engine!");
         inputs.Attach(window);
     }
 };

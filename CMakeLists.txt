@@ -47,6 +47,9 @@ add_executable(${PROJECT_NAME}
         # files management
         include/files_management/files.h
         src/files_management/files.cpp
+        # audio management
+        include/audio/audio.h
+        src/audio/audio.cpp
         # engine
         include/engine/winSettings.h
         src/engine/winSettings.cpp

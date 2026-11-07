@@ -10,8 +10,6 @@
 #include "gpu/shader.h"
 #include "files_management/files.h"
 
-using namespace std;
-
 int main() {
     try {
         // Init
@@ -38,8 +36,8 @@ int main() {
 
         engine.DestroyAll();
         return 0;
-    } catch (const exception& e) {
-        cerr << "Fatal error:\n" << e.what() << "\n";
+    } catch (const std::exception& e) {
+        std::cerr << "Fatal error:\n" << e.what() << "\n";
         return 1;
     }
 }

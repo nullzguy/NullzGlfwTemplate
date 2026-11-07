@@ -43,5 +43,5 @@ The philosophy is about making everything simple and clean - by using functions 
 ## TODO
 - Add project debugging helpers
 - Add fences
-- Add audio pipeline
+- Add audio pipeline (DOING)
 - Do some optimizations maybe..?

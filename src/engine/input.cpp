@@ -29,24 +29,24 @@ bool input::MouseButtonDown(int mb) {
 void input::ScrollCallback(GLFWwindow* w, double x, double y) {
     void* raw = glfwGetWindowUserPointer(w);
     input* self = static_cast<input*>(raw);
-    if (self) self->scrollAccum += dvec2(x, y);
+    if (self) self->scrollAccum += glm::dvec2(x, y);
 }
 
 void input::Poll() {
     if (ImGui::GetIO().WantCaptureMouse)
-        scrollAccum = dvec2(0.0);
+        scrollAccum = glm::dvec2(0.0);
 
     scrollDelta = scrollAccum;
-    scrollAccum = dvec2(0.0);
+    scrollAccum = glm::dvec2(0.0);
 }
 
-dvec2 input::ScrollDelta() const {
+glm::dvec2 input::ScrollDelta() const {
     return scrollDelta;
 }
 
-dvec2 input::CursorDelta() {
-    dvec2 lastPos = cursorPos;
+glm::dvec2 input::CursorDelta() {
+    glm::dvec2 lastPos = cursorPos;
     glfwGetCursorPos(window, &cursorPos.x, &cursorPos.y);
-    if (ImGui::GetIO().WantCaptureMouse) return dvec2(0.0);
+    if (ImGui::GetIO().WantCaptureMouse) return glm::dvec2(0.0);
     return cursorPos - lastPos;
 }
