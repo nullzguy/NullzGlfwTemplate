@@ -2,8 +2,11 @@
 
 #include <iostream>
 #include <algorithm>
+#include <string>
 #include <utility>
 #include <vector>
+
+#include "files_management/files.h"
 
 struct audio {
     int sampleRate; // 48000 for instance
@@ -11,8 +14,8 @@ struct audio {
 
     audio(int rate, std::vector<float> samples_) : sampleRate(rate), samples(std::move(samples_)) {}
 
-    void ImportWav(const char* path) {}
-    void ExportWav(const char* path) {}
+    int ImportWav(const char* path);
+    int ExportWav(const char* path);
 
     int ChangeSpeed(float mul);
     int ChangeVolume(float mul);
