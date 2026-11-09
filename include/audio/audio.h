@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "files_management/files.h"
+#include "misc/helpers.h"
 
 struct audio {
     int sampleRate; // 48000 for instance

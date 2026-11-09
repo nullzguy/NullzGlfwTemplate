@@ -6,58 +6,32 @@ int audio::ImportWav(const char* path) {
 
     // Filesize
     int o = 4;
-    uint fileSize = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00) |
-        (wav[o+2] << 16 & 0x00ff0000) |
-        (wav[o+3] << 24 & 0xff000000)
-    );
+    uint fileSize = Read4xBu(wav, o);
     std::cout << "Filesize: " << fileSize << " bytes\n";
 
     // Fmt block size
     o = 16;
-    uint fmtBlockSize = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00) |
-        (wav[o+2] << 16 & 0x00ff0000) |
-        (wav[o+3] << 24 & 0xff000000)
-    );
+    uint fmtBlockSize = Read4xBu(wav, o);
     std::cout << "\"fmt \" block size: " << fmtBlockSize << " bytes\n";
 
     // Audio format
     o = 20;
-    uint audioFormat = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00)
-    );
+    uint audioFormat = Read2xBu(wav, o);
     std::cout << "Audio format: " << ((audioFormat == 1) ? "PCM integer" : (audioFormat == 3) ? "IEEE 754 float" : "Unknown") << "\n";
 
     // Number of channels
     o = 22;
-    uint numChannels = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00)
-    );
+    uint numChannels = Read2xBu(wav, o);
     std::cout << "Number of channels: " << numChannels << "\n";
 
     // Frequency
     o = 24;
-    uint frequency = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00) |
-        (wav[o+2] << 16 & 0x00ff0000) |
-        (wav[o+3] << 24 & 0xff000000)
-    );
+    uint frequency = Read4xBu(wav, o);
     std::cout << "Frequency: " << frequency << " hz\n";
 
     // Bytes per second
     o = 28;
-    uint bytesPerSec = (
-        (wav[o+0] << 0  & 0x000000ff) |
-        (wav[o+1] << 8  & 0x0000ff00) |
-        (wav[o+2] << 16 & 0x00ff0000) |
-        (wav[o+3] << 24 & 0xff000000)
-    );
+    uint bytesPerSec = Read4xBu(wav, o);
     std::cout << "Bytes per second: " << bytesPerSec << " B/s\n";
 
     return 0;

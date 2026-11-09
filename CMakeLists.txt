@@ -68,6 +68,9 @@ add_executable(${PROJECT_NAME}
         src/main/sim.cpp
         include/main/render.h
         src/main/render.cpp
+        # misc
+        include/misc/helpers.h
+        src/misc/helpers.cpp
         # imgui
         ${imgui_SOURCE_DIR}/imgui.cpp
         ${imgui_SOURCE_DIR}/imgui_draw.cpp
