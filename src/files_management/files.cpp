@@ -1,9 +1,9 @@
 #include "files_management/files.h"
 
 int CreateFile(const char* path) {
-    ofstream file(path);
+    std::ofstream file(path);
     if (!file.is_open()) {
-        cerr << "Failed to remove file \"" << path << "\".\n";
+        std::cerr << "Failed to remove file \"" << path << "\".\n";
         return 1;
     }
     return 0;
@@ -11,7 +11,7 @@ int CreateFile(const char* path) {
 
 int DeleteFile(const char* path) {
     if (remove(path) != 0) {
-        cerr << "Failed to remove file \"" << path << "\".\n";
+        std::cerr << "Failed to remove file \"" << path << "\".\n";
         return 1;
     }
     return 0;
@@ -19,22 +19,22 @@ int DeleteFile(const char* path) {
 
 int MoveFile(const char* path, const char* destPath) {
     if (rename(path, destPath) != 0) {
-        cerr << "Failed to move/rename file\n";
+        std::cerr << "Failed to move/rename file\n";
         return 1;
     }
     return 0;
 }
 
 int CopyFile(const char* src, const char* dest) {
-    ifstream source(src, ios::binary);
-    ofstream destination(dest, ios::binary);
+    std::ifstream source(src, std::ios::binary);
+    std::ofstream destination(dest, std::ios::binary);
 
     if (!source.is_open()) {
-        cerr << "Failed to open file \"" << src << "\".\n";
+        std::cerr << "Failed to open file \"" << src << "\".\n";
         return 1;
     }
     if (!destination.is_open()) {
-        cerr << "Failed to open/create file \"" << dest << "\".";
+        std::cerr << "Failed to open/create file \"" << dest << "\".";
         return 1;
     }
 
@@ -43,34 +43,34 @@ int CopyFile(const char* src, const char* dest) {
     return 0;
 }
 
-int LoadFileToString(const char* path, string& fileData) {
-    ifstream file(path, ios::binary | ios::ate);
+int LoadFileToString(const char* path, std::string& fileData) {
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
 
     if (!file.is_open()) {
-        cerr << "Failed to open file \"" << path << "\".\n";
+        std::cerr << "Failed to open file \"" << path << "\".\n";
         return 1;
     }
 
-    streamsize fileLen = file.tellg();
+    std::streamsize fileLen = file.tellg();
     if (fileLen < 0) {
-        cerr << "Failed to determine size of file \"" << path << "\".\n";
+        std::cerr << "Failed to determine size of file \"" << path << "\".\n";
         return 1;
     }
 
-    fileData.resize(static_cast<size_t>(fileLen));
+    fileData.resize(static_cast<std::size_t>(fileLen));
     file.seekg(0);
     if (!file.read(fileData.data(), fileLen)) {
-        cerr << "Failed to read file \"" << path << "\".\n";
+        std::cerr << "Failed to read file \"" << path << "\".\n";
         return 1;
     }
 
     return 0;
 }
 
-int ExportStringToFile(const char* path, string& fileData) {
-    ofstream file(path);
+int ExportStringToFile(const char* path, std::string& fileData) {
+    std::ofstream file(path);
     if (!file.is_open()) {
-        cout << "Failed to open file\n";
+        std::cout << "Failed to open file\n";
         return 1;
     }
 
@@ -79,11 +79,11 @@ int ExportStringToFile(const char* path, string& fileData) {
     return 0;
 }
 
-int AddStringToFile(const char* path, string& data) {
-    ofstream file;
-    file.open(path, ios::app);
+int AddStringToFile(const char* path, std::string& data) {
+    std::ofstream file;
+    file.open(path, std::ios::app);
     if (!file.is_open()) {
-        cout << "Failed to open file\n";
+        std::cout << "Failed to open file\n";
         return 1;
     }
     file << data;

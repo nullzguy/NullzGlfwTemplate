@@ -8,8 +8,6 @@
 
 #include "gpu/shader.h"
 
-using namespace std;
-
 int shader::GetUniformLocation(const char* var) {
     auto it = uniformCache.find(var);
     if (it != uniformCache.end()) return it->second;
@@ -27,15 +25,15 @@ void shader::SetFloat(const char* var, float value) {
     int location = GetUniformLocation(var);
     glUniform1f(location, value);
 }
-void shader::SetVec2(const char* var, vec2 value) {
+void shader::SetVec2(const char* var, glm::vec2 value) {
     int location = GetUniformLocation(var);
     glUniform2f(location, value.x, value.y);
 }
-void shader::SetVec3(const char* var, vec3 value) {
+void shader::SetVec3(const char* var, glm::vec3 value) {
     int location = GetUniformLocation(var);
     glUniform3f(location, value.x, value.y, value.z);
 }
-void shader::SetVec4(const char* var, vec4 value) {
+void shader::SetVec4(const char* var, glm::vec4 value) {
     int location = GetUniformLocation(var);
     glUniform4f(location, value.x, value.y, value.z, value.w);
 }
@@ -43,15 +41,15 @@ void shader::SetFloatArray(const char* var, const float* values, int count) {
     int location = GetUniformLocation(var);
     glUniform1fv(location, count, values);
 }
-void shader::SetVec2Array(const char* var, const vec2* values, int count) {
+void shader::SetVec2Array(const char* var, const glm::vec2* values, int count) {
     int location = GetUniformLocation(var);
     glUniform2fv(location, count, &values[0].x);
 }
-void shader::SetVec3Array(const char* var, const vec3* values, int count) {
+void shader::SetVec3Array(const char* var, const glm::vec3* values, int count) {
     int location = GetUniformLocation(var);
     glUniform3fv(location, count, &values[0].x);
 }
-void shader::SetVec4Array(const char* var, const vec4* values, int count) {
+void shader::SetVec4Array(const char* var, const glm::vec4* values, int count) {
     int location = GetUniformLocation(var);
     glUniform4fv(location, count, &values[0].x);
 }
@@ -60,15 +58,15 @@ void shader::SetInt(const char* var, int value) {
     int location = GetUniformLocation(var);
     glUniform1i(location, value);
 }
-void shader::SetIvec2(const char* var, ivec2 value) {
+void shader::SetIvec2(const char* var, glm::ivec2 value) {
     int location = GetUniformLocation(var);
     glUniform2i(location, value.x, value.y);
 }
-void shader::SetIvec3(const char* var, ivec3 value) {
+void shader::SetIvec3(const char* var, glm::ivec3 value) {
     int location = GetUniformLocation(var);
     glUniform3i(location, value.x, value.y, value.z);
 }
-void shader::SetIvec4(const char* var, ivec4 value) {
+void shader::SetIvec4(const char* var, glm::ivec4 value) {
     int location = GetUniformLocation(var);
     glUniform4i(location, value.x, value.y, value.z, value.w);
 }
@@ -76,15 +74,15 @@ void shader::SetIntArray(const char* var, const int* values, int count) {
     int location = GetUniformLocation(var);
     glUniform1iv(location, count, values);
 }
-void shader::SetIvec2Array(const char* var, const ivec2* values, int count) {
+void shader::SetIvec2Array(const char* var, const glm::ivec2* values, int count) {
     int location = GetUniformLocation(var);
     glUniform2iv(location, count, &values[0].x);
 }
-void shader::SetIvec3Array(const char* var, const ivec3* values, int count) {
+void shader::SetIvec3Array(const char* var, const glm::ivec3* values, int count) {
     int location = GetUniformLocation(var);
     glUniform3iv(location, count, &values[0].x);
 }
-void shader::SetIvec4Array(const char* var, const ivec4* values, int count) {
+void shader::SetIvec4Array(const char* var, const glm::ivec4* values, int count) {
     int location = GetUniformLocation(var);
     glUniform4iv(location, count, &values[0].x);
 }
@@ -113,7 +111,7 @@ static unsigned int compileShader(const char* source, GLenum shaderType) {
             infoLog
         );
 
-        cerr << infoLog << '\n';
+        std::cerr << infoLog << '\n';
 
         glDeleteShader(shader);
         return 0;
@@ -168,7 +166,7 @@ shader::shader(const char* vertexPath, const char* fragmentPath) {
             infoLog
         );
 
-        cerr << "Failed to link shader:\n" << infoLog << '\n';
+        std::cerr << "Failed to link shader:\n" << infoLog << '\n';
 
         glDeleteProgram(program);
         glDeleteShader(vertexShader);

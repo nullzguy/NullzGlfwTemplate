@@ -4,8 +4,6 @@
 
 #include <glad/gl.h>
 
-using namespace std;
-
 static void createTex1D(unsigned int &texID, int width, GLint internalFormat, GLenum format, GLenum type) {
     glGenTextures(1, &texID);
     glBindTexture(GL_TEXTURE_1D, texID);
@@ -63,7 +61,7 @@ void CreateFBO1D(unsigned int &FBOId, unsigned int &texID) {
     glGenFramebuffers(1, &FBOId);
     glBindFramebuffer(GL_FRAMEBUFFER, FBOId);
     glFramebufferTexture1D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_1D, texID, 0);
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) cerr << "FBO is incomplete!\n";
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) std::cerr << "FBO is incomplete!\n";
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -71,7 +69,7 @@ void CreateFBO2D(unsigned int &FBOId, unsigned int &texID) {
     glGenFramebuffers(1, &FBOId);
     glBindFramebuffer(GL_FRAMEBUFFER, FBOId);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, texID, 0);
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) cerr << "FBO is incomplete!\n";
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) std::cerr << "FBO is incomplete!\n";
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
@@ -79,7 +77,7 @@ void CreateFBO3D(unsigned int &FBOId, unsigned int &texID) {
     glGenFramebuffers(1, &FBOId);
     glBindFramebuffer(GL_FRAMEBUFFER, FBOId);
     glFramebufferTexture3D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_3D, texID, 0, 0);
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) cerr << "FBO is incomplete!\n";
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) std::cerr << "FBO is incomplete!\n";
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

@@ -3,13 +3,11 @@
 #include <glm/glm.hpp>
 #include <GLFW/glfw3.h>
 
-using namespace glm;
-
 struct input {
     GLFWwindow* window = nullptr;
-    dvec2 cursorPos{};
-    dvec2 scrollAccum{};
-    dvec2 scrollDelta{};
+    glm::dvec2 cursorPos{};
+    glm::dvec2 scrollAccum{};
+    glm::dvec2 scrollDelta{};
     
     // Methods
     bool Attach(GLFWwindow* w);
@@ -17,8 +15,8 @@ struct input {
     bool MouseButtonDown(int mb);
     void Poll();
     static void ScrollCallback(GLFWwindow* w, double x, double y);
-    dvec2 ScrollDelta() const;
-    dvec2 CursorDelta();
+    glm::dvec2 ScrollDelta() const;
+    glm::dvec2 CursorDelta();
     
     input() = default;
 };

@@ -47,6 +47,9 @@ add_executable(${PROJECT_NAME}
         # files management
         include/files_management/files.h
         src/files_management/files.cpp
+        # audio management
+        include/audio/audio.h
+        src/audio/audio.cpp
         # engine
         include/engine/winSettings.h
         src/engine/winSettings.cpp
@@ -65,6 +68,9 @@ add_executable(${PROJECT_NAME}
         src/main/sim.cpp
         include/main/render.h
         src/main/render.cpp
+        # misc
+        include/misc/helpers.h
+        src/misc/helpers.cpp
         # imgui
         ${imgui_SOURCE_DIR}/imgui.cpp
         ${imgui_SOURCE_DIR}/imgui_draw.cpp
