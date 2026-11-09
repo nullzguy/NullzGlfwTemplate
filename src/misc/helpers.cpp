@@ -15,3 +15,16 @@ uint Read4xBu(std::string& str, int idx) {
         (str[idx+3] << 24 & 0xff000000)
     );
 }
+
+int SearchStrIdx(std::string& str, std::string& item) {
+    int iters = str.length()-item.length()+1;
+    for (int i = 0; i < iters; i++) {
+        bool b = false;
+        for (int j = 0; j < item.length(); j++) {
+            if (str[i+j] != item[j]) {b = true; break;}
+        }
+        if (b) continue;
+        return i;
+    }
+    return -1;
+}

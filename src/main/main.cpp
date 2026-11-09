@@ -9,11 +9,12 @@
 #include "gpu/shader.h"
 #include "files_management/files.h"
 #include "audio/audio.h"
+#include "misc/helpers.h"
 
 int main() {
-    audio a(-1, {0.0f});
-    a.ImportWav("/home/nullz/Documents/hi.wav");
-
+    //audio a(-1, {0.0f});
+    //a.ImportWav("/home/nullz/Documents/hi.wav");
+    
     // Init
     engine engine("nullz's glfw template", 800, 600);
     if (engine.InitImGui()!=0) return 1;
