@@ -15,6 +15,8 @@ Made for both lightweight tests, and massive projects.
 GLAD is bundled in `external/glad` and is loaded automatically at engine startup.
 ImGui is fetched by CMake and does not need to be installed manually.
 
+- Note: I chose OpenGL 4.1 compatibility profile for macs support. Yeah, i somewhat hate that too.
+
 ## About this project
 ##### Greets!
 
@@ -28,7 +30,7 @@ I consider this a little engine actually. I am actively working on it, until you
 
 The philosophy is about making everything simple and clean - by using functions and multiple files.
 
-- OpenGL fences here are not meaningful
+- OpenGL fences here are not meaningful for multiple reasons
 
 ## DONE
 - Added simple inputs support
@@ -43,4 +45,4 @@ The philosophy is about making everything simple and clean - by using functions 
 - Added file management
 
 ## TODO
-- No ideas nor issues left
+- No ideas nor issues left (for now)
