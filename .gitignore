@@ -26,4 +26,4 @@ Makefile
 *.sln.docstates
 
 # ImGUI
-imgui.ini
+./imgui.ini
