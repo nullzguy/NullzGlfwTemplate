@@ -41,5 +41,5 @@ The philosophy is about making everything simple and clean - by using functions 
 - Added file management
 
 ## TODO
-- Add fences
+- Add fences (DOING)
 - Do some optimizations maybe..?
