@@ -28,6 +28,8 @@ I consider this a little engine actually. I am actively working on it, until you
 
 The philosophy is about making everything simple and clean - by using functions and multiple files.
 
+- OpenGL fences here are not meaningful
+
 ## DONE
 - Added simple inputs support
 - Added ticking system limitation control just like framerate does
@@ -41,5 +43,4 @@ The philosophy is about making everything simple and clean - by using functions 
 - Added file management
 
 ## TODO
-- Add fences (DOING)
-- Do some optimizations maybe..?
+- No ideas nor issues left
